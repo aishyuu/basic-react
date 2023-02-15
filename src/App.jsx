@@ -2,6 +2,7 @@ import { useState } from 'react'
 
 function App() {
   const [array, setArray] = useState(['Hello', 'Element'])
+  const [textValue, setTextValue] = useState("");
 
   function allLists(props) {
     return(
@@ -12,14 +13,19 @@ function App() {
   }
 
   function handleClick() {
-    //Figure this out
+    setArray([...array, textValue]);
+    setTextValue("");
   }
 
   return (
     <div>
-      <input type="text" name="item" id="item" />
+      <input type="text" name="item" id="item" value={textValue} onChange={e => setTextValue(e.target.value)}/>
       <button onClick={handleClick}>Add to Array</button>
-      {allLists(array)}
+      <ul>
+        {array.map(element => (
+          <li>{element}</li>
+        ))}
+      </ul>
     </div>
   )
 }
